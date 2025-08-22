@@ -1,0 +1,37 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+<title>Login</title> 
+<script> 
+function loginUser() { 
+const username = document.getElementById("username").value.trim(); 
+const password = document.getElementById("password").value; 
+const storedUsername = localStorage.getItem("username"); 
+const storedPassword = localStorage.getItem("password"); 
+if (username === "" || password === "") { 
+alert("Enter both username and password."); 
+return false; 
+} 
+if (username === storedUsername && password === storedPassword) { 
+alert("Login successful!"); 
+return true; 
+} else { 
+alert("Invalid credentials. Try again."); 
+return false; 
+} 
+} 
+</script> 
+</head> 
+<body style="background-color: #75a1f2; font-family: Arial;"> 
+<center> 
+<h2>Login</h2> 
+<form onsubmit="return loginUser();"> 
+<label>Username:</label> 
+<input type="text" id="username"><br><br> 
+<label>Password:</label> 
+<input type="password" id="password"><br><br> 
+<input type="submit" value="Login"> 
+</form> 
+</center> 
+</body> 
+</html>
