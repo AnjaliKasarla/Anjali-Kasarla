@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styling.css">
+    <title>Document</title>
+</head>
+<body>
+    <center>
+    <form id="myForm">
+        <h2>Registration Form</h2>
+        <div class="form-group"></div>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name"><br><br>
+            <div class="error-message" id="nameError" style="color: red;"></div>
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email"><br><br>
+            <div class="error-message" id="emailError" style="color: red;"></div>
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password"><br><br>
+            <div class="error-message" id="passwordError" style="color: red;"></div>
+        </div>
+        <div class="form-group">
+            <label for="phone">Phone:</label>
+            <input type="tel" id="phone" name="phone"><br><br>
+            <div class="error-message" id="phoneError" style="color: red;"></div>
+        </div>
+        <input type="submit" value="Submit" style="color: green;">
+
+    </form>
+</center>
+<script>
+    const form=document.getElementById('myForm');
+    const fullname=document.getElementById('name');
+    const email=document.getElementById('email');
+    const password=document.getElementById('password');
+    const phone=document.getElementById('phone');
+
+    const nameError=document.getElementById('nameError');
+    const emailError=document.getElementById('emailError');
+    const passwordError=document.getElementById('passwordError');
+    const phoneError=document.getElementById('phoneError'); 
+
+    const emailPattern=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const phonePattern=/^\d{10}$/;
+    const passwordPattern=/^(?=.[A-Za-z])(?=.\d)[A-Za-z\d]{8,}$/;
+
+    function validateFullName() {
+        if (fullname.value.trim() === '') {
+            nameError.textContent = 'Full Name is required.';
+            return false;
+        }
+        nameError.textContent = "";
+        return true;
+    }
+
+    function validateEmail() {
+        if (email.value.trim() === '') {
+            emailError.textContent = 'Email is required.';
+            return false;
+        }
+        if (!emailPattern.test(email.value.trim())) {
+            emailError.textContent = 'Invalid email format.';
+            return false;
+        }
+        emailError.textContent = '';
+        return true;
+    }
+
+    function validatePassword() {
+        if (password.value.trim() === '') {
+            passwordError.textContent = 'Password is required.';
+            return false;
+        }
+        if (!passwordPattern.test(password.value.trim())) {
+            passwordError.textContent = 'Password must be at least 8 characters long and contain at least one letter and one number.';
+            return false;
+        }
+        passwordError.textContent = '';
+        return true;
+    }
+
+    function validatePhone() {
+        if (phone.value.trim() === '') {
+            phoneError.textContent = 'Phone number is required.';
+            return false;
+        }
+        if (!phonePattern.test(phone.value.trim())) {
+            phoneError.textContent = 'Invalid phone number format.';
+            return false;
+        }
+        phoneError.textContent = '';
+        return true;
+    }
+
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        const isValidFullName = validateFullName();
+        const isValidEmail = validateEmail();
+        const isValidPassword = validatePassword();
+        const isValidPhone = validatePhone();
+
+        if (isValidFullName && isValidEmail && isValidPassword && isValidPhone) {
+            alert('Form submitted successfully!');
+            form.reset();
+        }
+    });
+    
+
+
+</script>
+</body>
+</html>
